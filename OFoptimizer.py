@@ -4,8 +4,8 @@ import numpy as np
 
 # ADJUSTABLE PARAMETERS
 chamber_pressure = 30e5  # Pa
-nozzle_expansion_ratio = 10
-ambient_pressure = 1e5  # Pa
+nozzle_expansion_ratio = 8.25  # -
+ambient_pressure = 0.608e5  # Pa
 
 # PROPELLANT SELECTOR
 fuel = ['Ethanol', 'H2O']
@@ -59,6 +59,9 @@ print(f'Mixture Ratio for Maximum Ambient Isp: {mixture_ratios[np.argmax(isp_amb
 print(f'Maximum Combustion Temperature: {max(tcombs)}')
 print(f'Mixture Ratio for Maximum Combustion Temperature: {mixture_ratios[np.argmax(tcombs)]}')
 
+print(f'\nMolar Weight: {cea.get_Throat_MolWt_gamma(Pc=chamber_pressure, MR=mixture_ratios[np.argmax(isp_ambients)], eps=nozzle_expansion_ratio)[0]}')
+print(f'Specific Heat Coefficient: {cea.get_Throat_MolWt_gamma(Pc=chamber_pressure, MR=mixture_ratios[np.argmax(isp_ambients)], eps=nozzle_expansion_ratio)[1]}')
+print(f'Combustion Temperature for max Isp: {tcombs[np.argmax(isp_ambients)]}')
 
 # Plot the graph
 fig, ax1 = plt.subplots()
